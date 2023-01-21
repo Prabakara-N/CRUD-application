@@ -47,6 +47,7 @@ function addTodoDOM() {
        <i class="fa-solid fa-xmark icon-delete" onclick=deleteItem(${task.id})></i>
       </div>`;
 
+    // appending list elements
     outputEl.appendChild(taskEl);
   });
 }
