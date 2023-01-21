@@ -14,10 +14,17 @@ const outputEl = document.querySelector(".food-container");
 const button = document.getElementById("btn");
 
 // getting data
-const data = JSON.parse(localStorage.getItem("tasks"));
+// const data = JSON.parse(localStorage.getItem("tasks"));
 
 //global variables
-let tasks = data.length > 0 ? data : []; //to store a data
+
+let tasks = JSON.parse(localStorage.getItem("tasks")); //to store a data
+if (!tasks) {
+  //if task's isn't exist,pass an empty array to tasks
+  tasks = [];
+} else {
+  tasks;
+}
 let isEditing = false; //updating item is false initially
 let editId = null;
 
@@ -111,6 +118,10 @@ formEl.addEventListener("submit", (e) => {
     // update the local storage
     localStorage.setItem("tasks", JSON.stringify(tasks));
   } else {
+    // if (!tasks) {
+    //   //if task's isn't exist,pass an empty array to tasks
+    //   tasks = [];
+    // }
     //create task objects
     const task = {
       id: Date.now(), //for unique id
