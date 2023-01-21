@@ -13,12 +13,10 @@ const outputEl = document.querySelector(".food-container");
 //btn
 const button = document.getElementById("btn");
 
-// getting data
-// const data = JSON.parse(localStorage.getItem("tasks"));
-
 //global variables
-
+// getting data
 let tasks = JSON.parse(localStorage.getItem("tasks")); //to store a data
+
 if (!tasks) {
   //if task's isn't exist,pass an empty array to tasks
   tasks = [];

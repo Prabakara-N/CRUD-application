@@ -57,7 +57,10 @@ h1 {
 
 .food-input,
 .quantity-input {
-  padding: 0.9rem 11rem 0.75rem 0.9rem;
+  padding: 0.9rem 0;
+  padding-left: 0.75rem;
+  width: 400px;
+  margin: 0 auto;
   border: none;
   font-size: 0.9rem;
   font-weight: 600;
@@ -174,4 +177,37 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* media screen */
+@media screen and (max-width: 600px) {
+  main {
+    width: 90%;
+    margin: 2rem auto;
+  }
+
+  form {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .food-input,
+  .quantity-input {
+    width: 350px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .food-input,
+  .quantity-input {
+    width: 98%;
+    margin: 0 auto;
+  }
 }
