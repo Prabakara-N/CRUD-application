@@ -13,24 +13,25 @@ const outputEl = document.querySelector(".food-container");
 //btn
 const button = document.getElementById("btn");
 
+// getting data
+const data = JSON.parse(localStorage.getItem("tasks"));
+
 //global variables
-let tasks = []; //to store a data
-let isEditing = false;
+let tasks = data.length > 0 ? data : []; //to store a data
+let isEditing = false; //updating item is false initially
 let editId = null;
 
 //functions
 
 //init function
 function init() {
+  // outputEl.innerHTML = null;
   isEditing = false;
   editId = null;
   button.innerText = "Enter";
 }
 
-//for displayUI without repeating
-function displayUI() {
-  outputEl.innerHTML = null;
-
+function addTodoDOM() {
   //display items on the screen
   tasks.forEach((task) => {
     //creating a li element
@@ -41,13 +42,21 @@ function displayUI() {
 
     //showing output with innerHTML & adding delete and update icons
     taskEl.innerHTML = `${task.taskName} - ${task.count} 
-    <div class=icon-container>
-     <i class="fa-solid fa-pen  icon-update" onclick=updateItem(${task.id})></i>
-     <i class="fa-solid fa-xmark icon-delete" onclick=deleteItem(${task.id})></i>
-    </div>`;
+      <div class=icon-container>
+       <i class="fa-solid fa-pen  icon-update" onclick=updateItem(${task.id})></i>
+       <i class="fa-solid fa-xmark icon-delete" onclick=deleteItem(${task.id})></i>
+      </div>`;
 
     outputEl.appendChild(taskEl);
   });
+}
+addTodoDOM();
+
+//for displayUI without repeating
+function displayUI() {
+  outputEl.innerHTML = null;
+
+  addTodoDOM();
 }
 
 //delete the item
@@ -55,6 +64,9 @@ function deleteItem(id) {
   tasks = tasks.filter((task) => task.id !== id);
 
   displayUI();
+
+  // update the local storage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 //update the item
@@ -78,6 +90,7 @@ formEl.addEventListener("submit", (e) => {
 
   const foodItems = foodInputEl.value;
   const quantity = quantityInputEl.value;
+
   if (isEditing) {
     tasks = tasks.map((task) => {
       if (task.id === editId) {
@@ -93,6 +106,9 @@ formEl.addEventListener("submit", (e) => {
 
     // calling initial setting
     init();
+
+    // update the local storage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   } else {
     //create task objects
     const task = {
@@ -103,6 +119,9 @@ formEl.addEventListener("submit", (e) => {
 
     //add task object to tasks array
     tasks.push(task);
+
+    // create local storage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   displayUI();
